@@ -8,10 +8,11 @@ import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 
 object Shan {
-
+val FilePath="file:///home/jpa/Desktop/output1/WA_Fn-UseC_-HR-Employee-Attrition.csv"
   def main(args: Array[String]) = {
     val spark = SparkSession.builder.appName("mapExample").master("local").getOrCreate()
-    val data = spark.read.textFile("file:///home/jpa/Desktop/output1/WA_Fn-UseC_-HR-Employee-Attrition.csv").rdd
+    val data = spark.read.textFile(FilePath).rdd
+
 
     /*    def onlyStrings(a: Any) = a match {
           case 1 => "Married"
@@ -19,7 +20,8 @@ object Shan {
           case 3 => "unmarried"
 
           case _ => null
-        }*/ val mapFile = data.map(line => (line, line.length)) // map transformation by length
+        }*/
+    val mapFile = data.map(line => (line, line.length)) // map transformation by length
     mapFile.foreach(println)
     //Action
     val mapf = data.map(x => x.split(" ").toString) //map Transformation by Split
@@ -38,8 +40,9 @@ object Shan {
     val now = Calendar.getInstance().getTimeInMillis
     //println(sw.toString())
     sh.saveAsTextFile("file:///home/jpa/Desktop/hadoop/shan/" + now) // Action
-    sh.saveAsObjectFile("file:///home/jpa/Desktop/hadoop/shan/" + now + "B")// Action
+    sh.saveAsObjectFile("file:///home/jpa/Desktop/hadoop/shan/" + now + "B")// Action and appending Date&time to maintain naming
     // sh.saveAsSequenceFile("file:///home/jpa/Desktop/hadoop/shan/" + now)
     //sp.saveAsTextFile("file:///home/jpa/Desktop/hadoop/shan/" + now) // we cannot apply an action RDD to Another action RDD
   }
+
 }
