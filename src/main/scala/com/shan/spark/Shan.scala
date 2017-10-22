@@ -12,8 +12,8 @@ val FilePath="file:///home/jpa/Desktop/output1/WA_Fn-UseC_-HR-Employee-Attrition
   def main(args: Array[String]) = {
     val spark = SparkSession.builder.appName("mapExample").master("local").getOrCreate()
     val data = spark.read.textFile(FilePath).rdd
-
-
+    val conf=new SparkConf()
+    val sc=new SparkContext(conf)
     /*    def onlyStrings(a: Any) = a match {
           case 1 => "Married"
           case 2 => "Divorced"
@@ -37,6 +37,10 @@ val FilePath="file:///home/jpa/Desktop/output1/WA_Fn-UseC_-HR-Employee-Attrition
     var sp = sh.collect() //Action
     var sw = sh.count() // Action
     println(sw)
+
+    //calling dataProcessingOnJson
+    //JsonSQL.dataProcessingOnJson(sc)
+
     val now = Calendar.getInstance().getTimeInMillis
     //println(sw.toString())
     sh.saveAsTextFile("file:///home/jpa/Desktop/hadoop/shan/" + now) // Action
