@@ -1,24 +1,3 @@
-/*package com.shan.spark
-import org.apache.spark.SparkContext
-import org.apache.spark.sql.SQLContext
-
-object JsonSQL {
-  def dataProcessingOnJson(sc : SparkContext) : Unit = {
-    val JsonFilePath="file:///home/jpa/Desktop/hadoop/employees.json"
-    val sqlContext=new SQLContext(sc)
-    val employees=sqlContext.read.json(JsonFilePath)
-    employees.printSchema()
-    employees.createOrReplaceTempView("employees")
-    val querySelect="SELECT salary from employees salary <=3000 AND <=5000"
-    val salary=sqlContext.sql(querySelect)
-    salary.show()
-
-
-  }
-
-}*/
-
-
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
